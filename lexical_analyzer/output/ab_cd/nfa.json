@@ -2,7 +2,7 @@
     "startingState": "S8",
     "S8": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S0",
             "S4"
         ]
@@ -21,13 +21,13 @@
     },
     "S1": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S2"
         ]
     },
     "S5": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S6"
         ]
     },
@@ -45,13 +45,13 @@
     },
     "S3": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S9"
         ]
     },
     "S7": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S9"
         ]
     },

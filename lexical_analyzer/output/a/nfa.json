@@ -7,6 +7,18 @@
         ]
     },
     "S1": {
+        "isTerminatingState": false,
+        "ε": [
+            "S2"
+        ]
+    },
+    "S2": {
+        "isTerminatingState": false,
+        ".": [
+            "S3"
+        ]
+    },
+    "S3": {
         "isTerminatingState": true
     }
 }

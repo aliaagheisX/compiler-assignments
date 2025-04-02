@@ -1,58 +1,62 @@
 {
-    "start_state": "S1",
-    "accept_states": [
-        "S9",
-        "S10"
-    ],
-    "transitions": {
-        "S1": {
-            "a-z": "S2",
-            "A-Z": "S3",
-            "0-9": "S4"
-        },
-        "S2": {
-            "2": "S5",
-            "a-z": "S2",
-            "A-Z": "S3",
-            "0-9": "S4"
-        },
-        "S3": {
-            "2": "S5",
-            "a-z": "S2",
-            "A-Z": "S3",
-            "0-9": "S4"
-        },
-        "S4": {
-            "2": "S5",
-            "a-z": "S2",
-            "A-Z": "S3",
-            "0-9": "S4"
-        },
-        "S5": {
-            "A-Z": "S6",
-            "a-z": "S7"
-        },
-        "S6": {
-            "A-Z": "S6",
-            ".": "S8",
-            "a-z": "S7"
-        },
-        "S7": {
-            "A-Z": "S6",
-            ".": "S8",
-            "a-z": "S7"
-        },
-        "S8": {
-            "A-Z": "S9",
-            "a-z": "S10"
-        },
-        "S9": {
-            "A-Z": "S9",
-            "a-z": "S10"
-        },
-        "S10": {
-            "A-Z": "S9",
-            "a-z": "S10"
-        }
+    "startingState": "S1",
+    "S1": {
+        "isTerminatingState": false,
+        "a-z": "S2",
+        "0-9": "S3",
+        "A-Z": "S4"
+    },
+    "S2": {
+        "isTerminatingState": false,
+        "a-z": "S2",
+        "2": "S5",
+        "0-9": "S3",
+        "A-Z": "S4"
+    },
+    "S3": {
+        "isTerminatingState": false,
+        "a-z": "S2",
+        "2": "S5",
+        "0-9": "S3",
+        "A-Z": "S4"
+    },
+    "S4": {
+        "isTerminatingState": false,
+        "a-z": "S2",
+        "2": "S5",
+        "0-9": "S3",
+        "A-Z": "S4"
+    },
+    "S5": {
+        "isTerminatingState": false,
+        "a-z": "S6",
+        "A-Z": "S7"
+    },
+    "S6": {
+        "isTerminatingState": false,
+        "a-z": "S6",
+        "A-Z": "S7",
+        ".": "S8"
+    },
+    "S7": {
+        "isTerminatingState": false,
+        "a-z": "S6",
+        "A-Z": "S7",
+        ".": "S8"
+    },
+    "S8": {
+        "isTerminatingState": false,
+        "a-z": "S9",
+        "A-Z": "S10"
+    },
+    "S9": {
+        "isTerminatingState": true,
+        "a-z": "S9",
+        "A-Z": "S10"
+    },
+    "S10": {
+        "isTerminatingState": true,
+        "a-z": "S9",
+        "A-Z": "S10"
     }
 }

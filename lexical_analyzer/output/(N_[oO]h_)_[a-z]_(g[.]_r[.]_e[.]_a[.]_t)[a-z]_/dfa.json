@@ -3,71 +3,80 @@
     "S1": {
         "isTerminatingState": false,
         "g": "S2",
-        "G": "S3"
+        "N": "S3",
+        "o": "S4",
+        "a-z": "S5",
+        "O": "S6"
     },
     "S2": {
         "isTerminatingState": false,
-        "e": "S4"
+        "r": "S7",
+        ".": "S8"
     },
     "S3": {
         "isTerminatingState": false,
-        "e": "S4"
+        "g": "S2",
+        "a-z": "S5"
     },
     "S4": {
         "isTerminatingState": false,
-        "t": "S5"
+        "g": "S2",
+        "a-z": "S5",
+        "h": "S9"
     },
     "S5": {
         "isTerminatingState": false,
-        "r": "S6",
-        "R": "S7"
+        "g": "S2",
+        "a-z": "S5"
     },
     "S6": {
         "isTerminatingState": false,
-        "i": "S8"
+        "g": "S2",
+        "a-z": "S5",
+        "h": "S9"
     },
     "S7": {
         "isTerminatingState": false,
-        "i": "S8"
+        "e": "S10",
+        ".": "S11"
     },
     "S8": {
         "isTerminatingState": false,
-        "c": "S9"
+        "r": "S7"
     },
     "S9": {
         "isTerminatingState": false,
-        "k": "S10"
+        "g": "S2",
+        "a-z": "S5"
     },
     "S10": {
         "isTerminatingState": false,
-        "r": "S11",
-        "R": "S12"
+        "a": "S12",
+        ".": "S13"
     },
     "S11": {
         "isTerminatingState": false,
-        "o": "S13"
+        "e": "S10"
     },
     "S12": {
         "isTerminatingState": false,
-        "o": "S13"
+        "t": "S14",
+        ".": "S15"
     },
     "S13": {
         "isTerminatingState": false,
-        "l": "S14"
+        "a": "S12"
     },
     "S14": {
-        "isTerminatingState": false,
-        "l": "S15"
+        "isTerminatingState": true,
+        "a-z": "S16"
     },
     "S15": {
         "isTerminatingState": false,
-        "e": "S16"
+        "t": "S14"
     },
     "S16": {
-        "isTerminatingState": false,
-        "d": "S17"
-    },
-    "S17": {
-        "isTerminatingState": true
+        "isTerminatingState": true,
+        "a-z": "S16"
     }
 }

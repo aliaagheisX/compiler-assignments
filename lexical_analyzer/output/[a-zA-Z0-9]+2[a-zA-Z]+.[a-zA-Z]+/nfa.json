@@ -2,20 +2,20 @@
     "startingState": "S10",
     "S10": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S8"
         ]
     },
     "S8": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S4",
             "S6"
         ]
     },
     "S4": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S0",
             "S2"
         ]
@@ -40,38 +40,38 @@
     },
     "S7": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S9"
         ]
     },
     "S1": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S5"
         ]
     },
     "S3": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S5"
         ]
     },
     "S9": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S10",
             "S11"
         ]
     },
     "S5": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S9"
         ]
     },
     "S11": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S12"
         ]
     },
@@ -83,19 +83,19 @@
     },
     "S13": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S20"
         ]
     },
     "S20": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S18"
         ]
     },
     "S18": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S14",
             "S16"
         ]
@@ -114,26 +114,26 @@
     },
     "S15": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S19"
         ]
     },
     "S17": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S19"
         ]
     },
     "S19": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S20",
             "S21"
         ]
     },
     "S21": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S22"
         ]
     },
@@ -145,19 +145,19 @@
     },
     "S23": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S30"
         ]
     },
     "S30": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S28"
         ]
     },
     "S28": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S24",
             "S26"
         ]
@@ -176,19 +176,19 @@
     },
     "S25": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S29"
         ]
     },
     "S27": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S29"
         ]
     },
     "S29": {
         "isTerminatingState": false,
-        "\u03b5": [
+        "ε": [
             "S30",
             "S31"
         ]

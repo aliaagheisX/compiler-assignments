@@ -1,11 +1,7 @@
 {
-    "start_state": "S1",
-    "accept_states": [
-        "S1"
-    ],
-    "transitions": {
-        "S1": {
-            "a": "S1"
-        }
+    "startingState": "S1",
+    "S1": {
+        "isTerminatingState": true,
+        "a": "S1"
     }
 }

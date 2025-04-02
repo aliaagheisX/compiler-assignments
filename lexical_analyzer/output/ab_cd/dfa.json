@@ -1,21 +1,22 @@
 {
-    "start_state": "S1",
-    "accept_states": [
-        "S5",
-        "S4"
-    ],
-    "transitions": {
-        "S1": {
-            "c": "S2",
-            "a": "S3"
-        },
-        "S2": {
-            "d": "S4"
-        },
-        "S3": {
-            "b": "S5"
-        },
-        "S4": {},
-        "S5": {}
+    "startingState": "S1",
+    "S1": {
+        "isTerminatingState": false,
+        "c": "S2",
+        "a": "S3"
+    },
+    "S2": {
+        "isTerminatingState": false,
+        "d": "S4"
+    },
+    "S3": {
+        "isTerminatingState": false,
+        "b": "S5"
+    },
+    "S4": {
+        "isTerminatingState": true
+    },
+    "S5": {
+        "isTerminatingState": true
     }
 }

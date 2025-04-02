@@ -1,51 +1,61 @@
 {
-    "start_state": "S13",
-    "accept_states": [
-        "S1"
-    ],
-    "transitions": {
-        "S1": {},
-        "S2": {
-            "o": "S3"
-        },
-        "S3": {
-            "l": "S7"
-        },
-        "S4": {
-            "i": "S6"
-        },
-        "S5": {
-            "e": "S9"
-        },
-        "S6": {
-            "c": "S8"
-        },
-        "S7": {
-            "l": "S10"
-        },
-        "S8": {
-            "k": "S12"
-        },
-        "S9": {
-            "t": "S11"
-        },
-        "S10": {
-            "e": "S14"
-        },
-        "S11": {
-            "r": "S4",
-            "R": "S4"
-        },
-        "S12": {
-            "r": "S2",
-            "R": "S2"
-        },
-        "S13": {
-            "g": "S5",
-            "G": "S5"
-        },
-        "S14": {
-            "d": "S1"
-        }
+    "startingState": "S13",
+    "S1": {
+        "isTerminatingState": true
+    },
+    "S2": {
+        "isTerminatingState": false,
+        "l": "S5"
+    },
+    "S3": {
+        "isTerminatingState": false,
+        "i": "S7"
+    },
+    "S4": {
+        "isTerminatingState": false,
+        "o": "S2"
+    },
+    "S5": {
+        "isTerminatingState": false,
+        "l": "S10"
+    },
+    "S6": {
+        "isTerminatingState": false,
+        "e": "S8"
+    },
+    "S7": {
+        "isTerminatingState": false,
+        "c": "S9"
+    },
+    "S8": {
+        "isTerminatingState": false,
+        "t": "S11"
+    },
+    "S9": {
+        "isTerminatingState": false,
+        "k": "S12"
+    },
+    "S10": {
+        "isTerminatingState": false,
+        "e": "S14"
+    },
+    "S11": {
+        "isTerminatingState": false,
+        "r": "S3",
+        "R": "S3"
+    },
+    "S12": {
+        "isTerminatingState": false,
+        "r": "S4",
+        "R": "S4"
+    },
+    "S13": {
+        "isTerminatingState": false,
+        "g": "S6",
+        "G": "S6"
+    },
+    "S14": {
+        "isTerminatingState": false,
+        "d": "S1"
     }
 }

@@ -1,0 +1,18 @@
+regex_list = [
+        "(a|b)*abb",
+        "(N|[oO]h?)?[a-z]*(g[.]?r[.]?e[.]?a[.]?t)[a-z]*",
+        "[a-zA-Z]+[0-9]?",
+        "[a-zA-Z0-9]+",
+        "[a-zA-Z0-9]+2[a-zA-Z]+.[a-zA-Z]+",
+        "[Gg]et[Rr]ick[Rr]olled",
+        "[Oo]sama+",
+        "a.",
+        "a*",
+        "a?(a+b)*b",
+        "a|b",
+        "ab",
+        "ab|cd",
+        "ab|cd|ef",
+        "S[kK][iI][bB][iI][dD][iI]",
+        "TheBoysWishesUEidMubarak",
+    ]

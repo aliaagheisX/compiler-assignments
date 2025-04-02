@@ -137,13 +137,19 @@ def plot_dfa(dfa, file_name, output_folder):
 
 def save_dfa_to_json(dfa, file_name, output_folder):
     """
-    Save the DFA transitions and states to a JSON file.
+    Save the DFA transitions and states to a JSON file in the specified format.
     """
-    dfa_dict = {
-        "start_state": dfa.start_state,
-        "accept_states": list(dfa.accept_states),
-        "transitions": dfa.transitions,
-    }
+    # Initialize the result dictionary
+    dfa_dict = {"startingState": dfa.start_state}
+
+    # Add states and transitions
+    for state, transitions in dfa.transitions.items():
+        state_entry = {"isTerminatingState": state in dfa.accept_states}
+        for symbol, next_state in transitions.items():
+            state_entry[symbol] = next_state
+        dfa_dict[state] = state_entry
+
+    # Save the JSON to a file
     json_path = os.path.join(output_folder, file_name)
     with open(json_path, "w") as json_file:
         json.dump(dfa_dict, json_file, indent=4)

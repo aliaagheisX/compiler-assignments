@@ -1,25 +1,23 @@
 {
-    "start_state": "S1",
-    "accept_states": [
-        "S3",
-        "S4",
-        "S2"
-    ],
-    "transitions": {
-        "S1": {
-            "A-Z": "S2",
-            "a-z": "S3"
-        },
-        "S2": {
-            "0-9": "S4",
-            "A-Z": "S2",
-            "a-z": "S3"
-        },
-        "S3": {
-            "0-9": "S4",
-            "A-Z": "S2",
-            "a-z": "S3"
-        },
-        "S4": {}
+    "startingState": "S1",
+    "S1": {
+        "isTerminatingState": false,
+        "A-Z": "S2",
+        "a-z": "S3"
+    },
+    "S2": {
+        "isTerminatingState": true,
+        "a-z": "S3",
+        "0-9": "S4",
+        "A-Z": "S2"
+    },
+    "S3": {
+        "isTerminatingState": true,
+        "a-z": "S3",
+        "0-9": "S4",
+        "A-Z": "S2"
+    },
+    "S4": {
+        "isTerminatingState": true
     }
 }

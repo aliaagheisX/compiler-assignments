@@ -1,18 +1,15 @@
 {
-    "start_state": "S2",
-    "accept_states": [
-        "S1"
-    ],
-    "transitions": {
-        "S1": {
-            "a-z": "S1",
-            "0-9": "S1",
-            "A-Z": "S1"
-        },
-        "S2": {
-            "a-z": "S1",
-            "0-9": "S1",
-            "A-Z": "S1"
-        }
+    "startingState": "S2",
+    "S1": {
+        "isTerminatingState": true,
+        "0-9": "S1",
+        "A-Z": "S1",
+        "a-z": "S1"
+    },
+    "S2": {
+        "isTerminatingState": false,
+        "0-9": "S1",
+        "A-Z": "S1",
+        "a-z": "S1"
     }
 }

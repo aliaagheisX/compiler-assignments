@@ -232,8 +232,9 @@ def save_nfa_to_json(nfa: NFA, file_name: str, output_folder: str):
     """
     nfa_dict = nfa.to_dict()
     json_path = os.path.join(output_folder, file_name)
-    with open(json_path, "w") as json_file:
-        json.dump(nfa_dict, json_file, indent=4)
+    os.makedirs(output_folder, exist_ok=True)  # Ensure the output folder exists
+    with open(json_path, "w", encoding="utf-8") as json_file:
+        json.dump(nfa_dict, json_file, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
     regex = "(a|b)(c|d)?"

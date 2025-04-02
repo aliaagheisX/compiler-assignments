@@ -4,6 +4,7 @@ from nfa import NFA, plot_nfa, save_nfa_to_json
 from dfa import DFA, plot_dfa,save_dfa_to_json
 import networkx as nx
 from networkx.drawing.nx_agraph import to_agraph
+from test_cases import regex_list
 
 class MinimizedDFA:
     def __init__(self, dfa):
@@ -47,7 +48,8 @@ class MinimizedDFA:
             self.minimized_transitions[new_state] = {}
 
             for symbol, target in self.dfa.transitions[representative].items():
-                self.minimized_transitions[new_state][symbol] = state_mapping[target]
+                if target in state_mapping:
+                    self.minimized_transitions[new_state][symbol] = state_mapping[target]
 
     def _split_group(self, group, partitions):
         """
@@ -104,37 +106,26 @@ def plot_minimized_dfa(minimized_dfa, file_name, output_folder):
 
 def save_minimized_dfa_to_json(minimized_dfa, file_name, output_folder):
     """
-    Save the minimized DFA transitions and states to a JSON file.
+    Save the minimized DFA transitions and states to a JSON file with "isTerminatingState" for each state.
     """
-    dfa_dict = {
-        "start_state": minimized_dfa.start_state,
-        "accept_states": list(minimized_dfa.accept_states),
-        "transitions": minimized_dfa.minimized_transitions,
-    }
+    # Initialize the result dictionary
+    dfa_dict = {"startingState": minimized_dfa.start_state}
+
+    # Add states and transitions
+    for state, transitions in minimized_dfa.minimized_transitions.items():
+        state_entry = {"isTerminatingState": state in minimized_dfa.accept_states}
+        for symbol, next_state in transitions.items():
+            state_entry[symbol] = next_state
+        dfa_dict[state] = state_entry
+
+    # Save the JSON to a file
     json_path = os.path.join(output_folder, file_name)
-    with open(json_path, "w") as json_file:
-        json.dump(dfa_dict, json_file, indent=4)
+    os.makedirs(output_folder, exist_ok=True)  # Ensure the output folder exists
+    with open(json_path, "w", encoding="utf-8") as json_file:
+        json.dump(dfa_dict, json_file, indent=4, ensure_ascii=False)
+
 
 if __name__ == "__main__":
-    # List of regex test cases
-    regex_list = [
-        "(a|b)*abb",
-        "(N|[oO]h?)[a-z]*(g[.]?r[.]?e[.]?a[.]?t)[a-z]*",
-        "[a-zA-Z]+[0-9]?",
-        "[a-zA-Z0-9]+",
-        "[a-zA-Z0-9]+2[a-zA-Z]+.[a-zA-Z]+",
-        "[Gg]et[Rr]ick[Rr]olled",
-        "[Oo]sama+",
-        "a",
-        "a*",
-        "a?(a+b)*b",
-        "a|b",
-        "ab",
-        "ab|cd",
-        "ab|cd|ef",
-        "S[kK][iI][bB][iI][dD][iI]",
-        "TheBoysWishesUEidMubarak",
-    ]
 
     # Generate folder names by replacing *, |, and ? with _
     folder_names = [regex.replace("*", "_").replace("|", "_").replace("?", "_") for regex in regex_list]
