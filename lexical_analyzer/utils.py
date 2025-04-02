@@ -1,5 +1,59 @@
 import json
 from collections import deque
+import os
+import json
+import networkx as nx
+from networkx.drawing.nx_agraph import to_agraph
+
+
+def plot_fsm(transitions, start_state, accept_states, file_name, output_folder):
+    """
+    Visualize a finite state machine (FSM) as a graph and save it as an image.
+    :param transitions: A dictionary representing the FSM transitions.
+    :param start_state: The start state of the FSM.
+    :param accept_states: A set of accepting states.
+    :param file_name: The name of the output image file (e.g., "fsm.png").
+    :param output_folder: The folder where the image will be saved.
+    """
+def plot_fsm(transitions, start_state, accept_states, file_name, output_folder):
+    """
+    Visualize a finite state machine (FSM) as a graph and save it as an image.
+    :param transitions: A dictionary representing the FSM transitions.
+    :param start_state: The start state of the FSM.
+    :param accept_states: A set of accepting states.
+    :param file_name: The name of the output image file (e.g., "fsm.png").
+    :param output_folder: The folder where the image will be saved.
+    """
+    G = nx.MultiDiGraph()  # Use MultiDiGraph to allow multiple edges between nodes
+
+    # Add states (nodes)
+    for state, state_transitions in transitions.items():
+        # Add the state as a node
+        G.add_node(state, shape="doublecircle" if state in accept_states else "circle")
+
+        # Add transitions for the state
+        for symbol, next_states in state_transitions.items():
+            if isinstance(next_states, list):  # Handle NFA-style transitions
+                for next_state in next_states:
+                    G.add_edge(state, next_state, label=symbol)
+            else:  # Handle DFA-style transitions
+                G.add_edge(state, next_states, label=symbol)
+
+    # Add the start state
+    G.add_node("st", shape="none", label="")
+    G.add_edge("st", start_state)
+
+    # Convert to AGraph for styling and layout
+    A = to_agraph(G)
+    A.graph_attr.update(rankdir="LR")
+
+    # Ensure the output folder exists
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Save the graph as an image
+    graph_path = os.path.join(output_folder, file_name)
+    A.layout(prog="dot")
+    A.draw(graph_path)
 
 def load_json(file_path):
     """

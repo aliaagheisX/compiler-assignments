@@ -2,8 +2,7 @@ import os
 import json
 from nfa import NFA, plot_nfa, save_nfa_to_json
 from dfa import DFA, plot_dfa,save_dfa_to_json
-import networkx as nx
-from networkx.drawing.nx_agraph import to_agraph
+from utils import plot_fsm
 from test_cases import regex_list
 
 class MinimizedDFA:
@@ -48,8 +47,7 @@ class MinimizedDFA:
             self.minimized_transitions[new_state] = {}
 
             for symbol, target in self.dfa.transitions[representative].items():
-                if target in state_mapping:
-                    self.minimized_transitions[new_state][symbol] = state_mapping[target]
+                self.minimized_transitions[new_state][symbol] = state_mapping[target]
 
     def _split_group(self, group, partitions):
         """
@@ -79,30 +77,17 @@ class MinimizedDFA:
         }
     
 
-def plot_minimized_dfa(minimized_dfa, file_name, output_folder):
+def plot_minimized_dfa(minimized_dfa, output_folder):
     """
     Visualize the minimized DFA as a graph and save it as an image.
     """
-    G = nx.DiGraph()
-
-    # Add states (nodes)
-    for state, transitions in minimized_dfa.minimized_transitions.items():
-        G.add_node(state, shape="doublecircle" if state in minimized_dfa.accept_states else "circle")
-        for symbol, next_state in transitions.items():
-            G.add_edge(state, next_state, label=symbol)
-
-    # Add the start state
-    G.add_node("st", shape="none", label="")
-    G.add_edge("st", minimized_dfa.start_state)
-
-    # Convert to AGraph for styling and layout
-    A = to_agraph(G)
-    A.graph_attr.update(rankdir="LR")
-
-    # Save the graph as an image
-    graph_path = os.path.join(output_folder, file_name)
-    A.layout(prog="dot")
-    A.draw(graph_path)
+    plot_fsm(
+        transitions=minimized_dfa.minimized_transitions,
+        start_state=minimized_dfa.start_state,
+        accept_states=minimized_dfa.accept_states,
+        file_name="minimized_dfa.png",
+        output_folder=output_folder
+    )
 
 def save_minimized_dfa_to_json(minimized_dfa, file_name, output_folder):
     """
@@ -149,6 +134,6 @@ if __name__ == "__main__":
         save_dfa_to_json(dfa, "dfa.json", output_folder)
 
         # Save minimized DFA graph and JSON
-        plot_minimized_dfa(minimized_dfa, "minimized_dfa.png", output_folder)
+        plot_minimized_dfa(minimized_dfa,  output_folder)
         save_minimized_dfa_to_json(minimized_dfa, "minimized_dfa.json", output_folder)
 

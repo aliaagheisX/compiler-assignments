@@ -7,25 +7,25 @@
     },
     "S2": {
         "isTerminatingState": false,
-        "a": "S4",
-        "b": "S5"
+        "b": "S4",
+        "a": "S5"
     },
     "S3": {
         "isTerminatingState": true
     },
     "S4": {
-        "isTerminatingState": false,
-        "a": "S4",
-        "b": "S6"
+        "isTerminatingState": true,
+        "b": "S3",
+        "a": "S5"
     },
     "S5": {
-        "isTerminatingState": true,
-        "a": "S4",
-        "b": "S3"
+        "isTerminatingState": false,
+        "b": "S6",
+        "a": "S5"
     },
     "S6": {
         "isTerminatingState": false,
-        "a": "S4",
-        "b": "S3"
+        "b": "S3",
+        "a": "S5"
     }
 }
