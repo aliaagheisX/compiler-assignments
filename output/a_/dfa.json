@@ -1,0 +1,15 @@
+{
+    "start_state": "S1",
+    "accept_states": [
+        "S1",
+        "S2"
+    ],
+    "transitions": {
+        "S1": {
+            "a": "S2"
+        },
+        "S2": {
+            "a": "S2"
+        }
+    }
+}

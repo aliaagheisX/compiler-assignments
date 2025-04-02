@@ -80,9 +80,6 @@ class MinimizedDFA:
 def plot_minimized_dfa(minimized_dfa, file_name, output_folder):
     """
     Visualize the minimized DFA as a graph and save it as an image.
-    :param minimized_dfa: The MinimizedDFA object to visualize.
-    :param file_name: The name of the output image file (e.g., "minimized_dfa.png").
-    :param output_folder: The folder where the image will be saved.
     """
     G = nx.DiGraph()
 
@@ -108,9 +105,6 @@ def plot_minimized_dfa(minimized_dfa, file_name, output_folder):
 def save_minimized_dfa_to_json(minimized_dfa, file_name, output_folder):
     """
     Save the minimized DFA transitions and states to a JSON file.
-    :param minimized_dfa: The MinimizedDFA object to save.
-    :param file_name: The name of the output JSON file (e.g., "minimized_dfa.json").
-    :param output_folder: The folder where the JSON file will be saved.
     """
     dfa_dict = {
         "start_state": minimized_dfa.start_state,
@@ -125,37 +119,25 @@ if __name__ == "__main__":
     # List of regex test cases
     regex_list = [
         "(a|b)*abb",
-        # "(N|[oO]h?)[a-z]^(g[.]?[.r]?[.e]?[.a]?t)[a-z]",
-        # "[a-zA-Z]+[0-9]_",
-        # "[a-zA-Z0-9]+2[a-zA-Z]+[a-zA-Z0-9]",
-        # "[Oo]sama+",
-        # "a",
-        # "a_",
-        # "a_(a+b)_b",
-        # "a_b",
-        # "ab",
-        # "ab_cd",
-        # "ab_cd_ef",
-        # "S[kK][iI][bB][iI][dD][iI]",
-        # "TheBoysWishesUEidMubarak",
+        "(N|[oO]h?)[a-z]*(g[.]?r[.]?e[.]?a[.]?t)[a-z]*",
+        "[a-zA-Z]+[0-9]?",
+        "[a-zA-Z0-9]+",
+        "[a-zA-Z0-9]+2[a-zA-Z]+.[a-zA-Z]+",
+        "[Gg]et[Rr]ick[Rr]olled",
+        "[Oo]sama+",
+        "a",
+        "a*",
+        "a?(a+b)*b",
+        "a|b",
+        "ab",
+        "ab|cd",
+        "ab|cd|ef",
+        "S[kK][iI][bB][iI][dD][iI]",
+        "TheBoysWishesUEidMubarak",
     ]
 
-    folder_names = [
-        "a_b_abb",
-        # "N_oO_h_a-z_g_r_e_a_t",
-        # # "a-zA-Z_0-9_",
-        # # "a-zA-Z0-9_2_a-zA-Z_a-zA-Z0-9",
-        # # "Oo_sama_plus",
-        # # "a",
-        # # "a_",
-        # # "a_a_plus_b_b",
-        # # "a_b",
-        # # "ab",
-        # # "ab_cd",
-        # # "ab_cd_ef",
-        # # "SkKiIbBiIdDiI",
-        # # "TheBoysWishesUEidMubarak",
-    ]
+    # Generate folder names by replacing *, |, and ? with _
+    folder_names = [regex.replace("*", "_").replace("|", "_").replace("?", "_") for regex in regex_list]
 
     for regex, folder_name in zip(regex_list, folder_names):
         # Create output folder for each regex
@@ -169,8 +151,9 @@ if __name__ == "__main__":
 
         # Save DFA graph and JSON
         plot_dfa(dfa, "dfa.png", output_folder)
-        save_dfa_to_json(dfa, "dfa.json" , output_folder) 
+        save_dfa_to_json(dfa, "dfa.json", output_folder)
 
+        # Save minimized DFA graph and JSON
         plot_minimized_dfa(minimized_dfa, "minimized_dfa.png", output_folder)
         save_minimized_dfa_to_json(minimized_dfa, "minimized_dfa.json", output_folder)
 
