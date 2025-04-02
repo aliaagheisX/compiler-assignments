@@ -1,7 +1,7 @@
 {
-    "start_state": "S1",
+    "start_state": "S3",
     "accept_states": [
-        "S5"
+        "S1"
     ],
     "transitions": {
         "S1": {
@@ -17,12 +17,8 @@
             "b": "S3"
         },
         "S4": {
-            "b": "S5",
+            "b": "S1",
             "a": "S2"
-        },
-        "S5": {
-            "a": "S2",
-            "b": "S3"
         }
     }
 }

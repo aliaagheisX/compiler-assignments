@@ -109,7 +109,7 @@ class DFA:
         self.transitions = new_transitions
     
 
-def plot_dfa(dfa, output_folder):
+def plot_dfa(dfa, file_name, output_folder):
     """
     Visualize the DFA as a graph and save it as an image.
     """
@@ -130,12 +130,12 @@ def plot_dfa(dfa, output_folder):
     A.graph_attr.update(rankdir="LR")
 
     # Save the graph as an image
-    graph_path = os.path.join(output_folder, "dfa.png")
+    graph_path = os.path.join(output_folder, file_name)
     A.layout(prog="dot")
     A.draw(graph_path)
 
 
-def save_dfa_to_json(dfa, output_folder):
+def save_dfa_to_json(dfa, file_name, output_folder):
     """
     Save the DFA transitions and states to a JSON file.
     """
@@ -144,7 +144,7 @@ def save_dfa_to_json(dfa, output_folder):
         "accept_states": list(dfa.accept_states),
         "transitions": dfa.transitions,
     }
-    json_path = os.path.join(output_folder, "dfa.json")
+    json_path = os.path.join(output_folder, file_name)
     with open(json_path, "w") as json_file:
         json.dump(dfa_dict, json_file, indent=4)
 
@@ -193,6 +193,5 @@ if __name__ == "__main__":
         result_nfa = NFA().build_nfa_from_postfix(regex)
         dfa = DFA(result_nfa)
 
-        # Save DFA graph and JSON
-        plot_dfa(dfa, output_folder)
-        save_dfa_to_json(dfa, output_folder)
+        plot_dfa(dfa, "dfa.png", output_folder)
+        save_dfa_to_json(dfa, "dfa.json" , output_folder)
