@@ -57,7 +57,7 @@ class MinimizedDFA:
         for state in group:
             # Create a signature for the state based on its transitions
             signature = tuple(
-                next((i for i, part in enumerate(partitions) if target in part), -1)
+                (symbol, next((i for i, part in enumerate(partitions) if target in part), -1))
                 for symbol, target in self.dfa.transitions[state].items()
             )
             if signature not in split_map:
