@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import Dict, Optional
 from collections import deque, defaultdict
-import json
+import json, os 
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -186,33 +186,54 @@ class NFA:
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), indent=2)
 
-def plot_nfa(nfa: NFA):
+def plot_nfa(nfa: NFA, file_name:str, output_folder: str):
+    """
+    Visualize the NFA as a graph and save it as an image.
+    :param nfa: The NFA object to visualize.
+    :param output_folder: The folder where the image will be saved.
+    :param file_name: The name of the output image file (default is "nfa.png").
+    """
     data = nfa.to_dict()
     G = nx.DiGraph()
 
     # Add states (nodes)
     for state, transitions in data.items():
-        if state == "startingState": continue
+        if state == "startingState":
+            continue
         G.add_node(state, shape="doublecircle" if transitions["isTerminatingState"] else "circle")
-        
+
         for symbol, next_states in transitions.items():
-            if symbol == "isTerminatingState": continue
-            for next_state in next_states: 
+            if symbol == "isTerminatingState":
+                continue
+            for next_state in next_states:
                 G.add_edge(state, next_state, label=symbol)
+
+    # Convert to AGraph for styling and layout
     A = to_agraph(G)
-    # A.node_attr.update(style='filled', fillcolor='thistle', fontname='Helvetica', fontsize=14)
-    # A.edge_attr.update(fontname='Helvetica', fontsize=12)
-    
+
     # Set the initial state
     A.add_node("st", shape="none", label="")
     A.add_edge("st", data["startingState"])
-    
-    A.graph_attr.update(rankdir='LR')
-    # Render and display
-    A.layout(prog='dot')
-    A.draw("nfa.png")
-    
-    return Image.open("nfa.png")
+
+    # Configure graph layout
+    A.graph_attr.update(rankdir="LR")
+
+    # Ensure the output folder exists
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Save the graph as an image
+    graph_path = os.path.join(output_folder, file_name)
+    A.layout(prog="dot")
+    A.draw(graph_path)
+
+def save_nfa_to_json(nfa: NFA, file_name: str, output_folder: str):
+    """
+    Save the NFA transitions and states to a JSON file.
+    """
+    nfa_dict = nfa.to_dict()
+    json_path = os.path.join(output_folder, file_name)
+    with open(json_path, "w") as json_file:
+        json.dump(nfa_dict, json_file, indent=4)
 
 if __name__ == "__main__":
     regex = "(a|b)(c|d)?"

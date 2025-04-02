@@ -1,6 +1,6 @@
 import os
 import json
-from nfa import NFA
+from nfa import NFA, plot_nfa, save_nfa_to_json
 from dfa import DFA, plot_dfa,save_dfa_to_json
 import networkx as nx
 from networkx.drawing.nx_agraph import to_agraph
@@ -145,9 +145,13 @@ if __name__ == "__main__":
         os.makedirs(output_folder, exist_ok=True)
 
         # Build NFA and convert to DFA
-        result_nfa = NFA().build_nfa_from_postfix(regex)
-        dfa = DFA(result_nfa)
+        nfa = NFA().build_nfa_from_postfix(regex)
+        dfa = DFA(nfa)
         minimized_dfa = MinimizedDFA(dfa)
+
+        # Save nfa graph and JSON
+        plot_nfa(nfa, "nfa.png", output_folder)
+        save_nfa_to_json(nfa, "nfa.json", output_folder)
 
         # Save DFA graph and JSON
         plot_dfa(dfa, "dfa.png", output_folder)

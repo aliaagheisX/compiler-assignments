@@ -1,16 +1,16 @@
 {
-    "start_state": "S3",
+    "start_state": "S2",
     "accept_states": [
         "S1"
     ],
     "transitions": {
         "S1": {},
         "S2": {
-            "b": "S1"
+            "c": "S3",
+            "a": "S3"
         },
         "S3": {
-            "c": "S2",
-            "a": "S2"
+            "d": "S1"
         }
     }
 }
