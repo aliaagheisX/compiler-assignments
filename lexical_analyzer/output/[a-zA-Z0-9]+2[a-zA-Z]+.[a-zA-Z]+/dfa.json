@@ -2,61 +2,61 @@
     "startingState": "S1",
     "S1": {
         "isTerminatingState": false,
-        "0-9": "S2",
-        "A-Z": "S3",
-        "a-z": "S4"
+        "a-z": "S2",
+        "0-9": "S3",
+        "A-Z": "S4"
     },
     "S2": {
         "isTerminatingState": false,
+        "a-z": "S2",
         "2": "S5",
-        "0-9": "S2",
-        "A-Z": "S3",
-        "a-z": "S4"
+        "0-9": "S3",
+        "A-Z": "S4"
     },
     "S3": {
         "isTerminatingState": false,
+        "a-z": "S2",
         "2": "S5",
-        "0-9": "S2",
-        "A-Z": "S3",
-        "a-z": "S4"
+        "0-9": "S3",
+        "A-Z": "S4"
     },
     "S4": {
         "isTerminatingState": false,
+        "a-z": "S2",
         "2": "S5",
-        "0-9": "S2",
-        "A-Z": "S3",
-        "a-z": "S4"
+        "0-9": "S3",
+        "A-Z": "S4"
     },
     "S5": {
         "isTerminatingState": false,
-        "A-Z": "S6",
-        "a-z": "S7"
+        "a-z": "S6",
+        "A-Z": "S7"
     },
     "S6": {
         "isTerminatingState": false,
-        "A-Z": "S6",
         ".": "S8",
-        "a-z": "S7"
+        "a-z": "S6",
+        "A-Z": "S7"
     },
     "S7": {
         "isTerminatingState": false,
-        "A-Z": "S6",
         ".": "S8",
-        "a-z": "S7"
+        "a-z": "S6",
+        "A-Z": "S7"
     },
     "S8": {
         "isTerminatingState": false,
-        "A-Z": "S9",
-        "a-z": "S10"
+        "a-z": "S9",
+        "A-Z": "S10"
     },
     "S9": {
         "isTerminatingState": true,
-        "A-Z": "S9",
-        "a-z": "S10"
+        "a-z": "S9",
+        "A-Z": "S10"
     },
     "S10": {
         "isTerminatingState": true,
-        "A-Z": "S9",
-        "a-z": "S10"
+        "a-z": "S9",
+        "A-Z": "S10"
     }
 }

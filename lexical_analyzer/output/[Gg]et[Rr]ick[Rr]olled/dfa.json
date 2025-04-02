@@ -40,8 +40,8 @@
     },
     "S10": {
         "isTerminatingState": false,
-        "r": "S11",
-        "R": "S12"
+        "R": "S11",
+        "r": "S12"
     },
     "S11": {
         "isTerminatingState": false,

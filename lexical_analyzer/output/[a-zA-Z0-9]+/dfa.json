@@ -3,25 +3,25 @@
     "S1": {
         "isTerminatingState": false,
         "a-z": "S2",
-        "A-Z": "S3",
-        "0-9": "S4"
+        "0-9": "S3",
+        "A-Z": "S4"
     },
     "S2": {
         "isTerminatingState": true,
-        "0-9": "S4",
         "a-z": "S2",
-        "A-Z": "S3"
+        "0-9": "S3",
+        "A-Z": "S4"
     },
     "S3": {
         "isTerminatingState": true,
-        "0-9": "S4",
         "a-z": "S2",
-        "A-Z": "S3"
+        "0-9": "S3",
+        "A-Z": "S4"
     },
     "S4": {
         "isTerminatingState": true,
         "a-z": "S2",
-        "A-Z": "S3",
-        "0-9": "S4"
+        "0-9": "S3",
+        "A-Z": "S4"
     }
 }

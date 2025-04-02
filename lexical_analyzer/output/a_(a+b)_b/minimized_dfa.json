@@ -1,31 +1,31 @@
 {
-    "startingState": "S4",
+    "startingState": "S6",
     "S1": {
-        "isTerminatingState": true,
-        "a": "S6",
-        "b": "S2"
+        "isTerminatingState": true
     },
     "S2": {
-        "isTerminatingState": true
+        "isTerminatingState": true,
+        "b": "S1",
+        "a": "S3"
     },
     "S3": {
         "isTerminatingState": false,
-        "a": "S6",
-        "b": "S1"
+        "a": "S3",
+        "b": "S4"
     },
     "S4": {
         "isTerminatingState": false,
-        "a": "S3",
-        "b": "S2"
+        "b": "S1",
+        "a": "S3"
     },
     "S5": {
         "isTerminatingState": false,
-        "a": "S6",
-        "b": "S2"
+        "b": "S2",
+        "a": "S3"
     },
     "S6": {
         "isTerminatingState": false,
-        "a": "S6",
-        "b": "S5"
+        "b": "S1",
+        "a": "S5"
     }
 }
