@@ -4,8 +4,8 @@ from typing import Dict, Set, List
 from collections import deque
 import networkx as nx
 from networkx.drawing.nx_agraph import to_agraph
-from PIL import Image
 from nfa import NFA
+from utils import plot_fsm
 
 class DFA:
     def __init__(self, nfa):
@@ -111,28 +111,15 @@ class DFA:
 
 def plot_dfa(dfa, file_name, output_folder):
     """
-    Visualize the DFA as a graph and save it as an image.
+    Visualize the DFA as a graph and save it as an image using the common plot_fsm function.
     """
-    G = nx.DiGraph()
-
-    # Add states (nodes)
-    for state, transitions in dfa.transitions.items():
-        G.add_node(state, shape="doublecircle" if state in dfa.accept_states else "circle")
-        for symbol, next_state in transitions.items():
-            G.add_edge(state, next_state, label=symbol)
-
-    # Add the start state
-    G.add_node("st", shape="none", label="")
-    G.add_edge("st", dfa.start_state)
-
-    # Convert to AGraph for styling and layout
-    A = to_agraph(G)
-    A.graph_attr.update(rankdir="LR")
-
-    # Save the graph as an image
-    graph_path = os.path.join(output_folder, file_name)
-    A.layout(prog="dot")
-    A.draw(graph_path)
+    plot_fsm(
+        transitions=dfa.transitions,
+        start_state=dfa.start_state,
+        accept_states=dfa.accept_states,
+        file_name=file_name,
+        output_folder=output_folder
+    )
 
 
 def save_dfa_to_json(dfa, file_name, output_folder):
@@ -153,51 +140,3 @@ def save_dfa_to_json(dfa, file_name, output_folder):
     json_path = os.path.join(output_folder, file_name)
     with open(json_path, "w") as json_file:
         json.dump(dfa_dict, json_file, indent=4)
-
-if __name__ == "__main__":
-    # List of regex test cases
-    regex_list = [
-        "(a|b)*abb",
-        # "(N|[oO]h?)[a-z]^(g[.]?[.r]?[.e]?[.a]?t)[a-z]",
-        # "[a-zA-Z]+[0-9]_",
-        # "[a-zA-Z0-9]+2[a-zA-Z]+[a-zA-Z0-9]",
-        # "[Oo]sama+",
-        # "a",
-        # "a_",
-        # "a_(a+b)_b",
-        # "a_b",
-        # "ab",
-        # "ab_cd",
-        # "ab_cd_ef",
-        # "S[kK][iI][bB][iI][dD][iI]",
-        # "TheBoysWishesUEidMubarak",
-    ]
-
-    folder_names = [
-        "a_b_abb",
-        # "N_oO_h_a-z_g_r_e_a_t",
-        # # "a-zA-Z_0-9_",
-        # # "a-zA-Z0-9_2_a-zA-Z_a-zA-Z0-9",
-        # # "Oo_sama_plus",
-        # # "a",
-        # # "a_",
-        # # "a_a_plus_b_b",
-        # # "a_b",
-        # # "ab",
-        # # "ab_cd",
-        # # "ab_cd_ef",
-        # # "SkKiIbBiIdDiI",
-        # # "TheBoysWishesUEidMubarak",
-    ]
-
-    for regex, folder_name in zip(regex_list, folder_names):
-        # Create output folder for each regex
-        output_folder = os.path.join(os.getcwd(), "output", folder_name)
-        os.makedirs(output_folder, exist_ok=True)
-
-        # Build NFA and convert to DFA
-        result_nfa = NFA().build_nfa_from_postfix(regex)
-        dfa = DFA(result_nfa)
-
-        plot_dfa(dfa, "dfa.png", output_folder)
-        save_dfa_to_json(dfa, "dfa.json" , output_folder)

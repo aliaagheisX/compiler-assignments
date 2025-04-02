@@ -1,9 +1,8 @@
 import os 
 from utils import load_json, compare_automata_json
 from test_cases import regex_list
-if __name__ == "__main__":
-    # List of regex test cases
 
+if __name__ == "__main__":
     # Generate folder names by replacing *, |, and ? with _
     folder_names = [regex.replace("*", "_").replace("|", "_").replace("?", "_") for regex in regex_list]
 

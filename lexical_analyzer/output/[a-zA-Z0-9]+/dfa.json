@@ -20,8 +20,8 @@
     },
     "S4": {
         "isTerminatingState": true,
-        "0-9": "S4",
         "a-z": "S2",
-        "A-Z": "S3"
+        "A-Z": "S3",
+        "0-9": "S4"
     }
 }

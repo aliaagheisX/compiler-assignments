@@ -1,102 +1,102 @@
 {
-    "startingState": "S19",
+    "startingState": "S15",
     "S1": {
         "isTerminatingState": true
     },
     "S2": {
         "isTerminatingState": false,
-        "U": "S12"
+        "e": "S10"
     },
     "S3": {
         "isTerminatingState": false,
-        "i": "S7"
+        "e": "S4"
     },
     "S4": {
         "isTerminatingState": false,
-        "i": "S10"
+        "B": "S21"
     },
     "S5": {
         "isTerminatingState": false,
-        "a": "S23"
+        "h": "S3"
     },
     "S6": {
         "isTerminatingState": false,
-        "a": "S25"
+        "h": "S2"
     },
     "S7": {
         "isTerminatingState": false,
-        "d": "S18"
+        "d": "S12"
     },
     "S8": {
         "isTerminatingState": false,
-        "b": "S5"
+        "s": "S11"
     },
     "S9": {
         "isTerminatingState": false,
-        "s": "S17"
+        "s": "S6"
     },
     "S10": {
         "isTerminatingState": false,
-        "s": "S22"
+        "s": "S24"
     },
     "S11": {
         "isTerminatingState": false,
-        "s": "S2"
+        "W": "S18"
     },
     "S12": {
         "isTerminatingState": false,
-        "E": "S3"
+        "M": "S23"
     },
     "S13": {
         "isTerminatingState": false,
-        "e": "S20"
+        "a": "S25"
     },
     "S14": {
         "isTerminatingState": false,
-        "e": "S11"
+        "a": "S16"
     },
     "S15": {
         "isTerminatingState": false,
-        "o": "S24"
+        "T": "S5"
     },
     "S16": {
         "isTerminatingState": false,
-        "u": "S8"
+        "k": "S1"
     },
     "S17": {
         "isTerminatingState": false,
-        "W": "S4"
+        "i": "S7"
     },
     "S18": {
         "isTerminatingState": false,
-        "M": "S16"
+        "i": "S9"
     },
     "S19": {
         "isTerminatingState": false,
-        "T": "S21"
+        "y": "S8"
     },
     "S20": {
         "isTerminatingState": false,
-        "B": "S15"
+        "E": "S17"
     },
     "S21": {
         "isTerminatingState": false,
-        "h": "S13"
+        "o": "S19"
     },
     "S22": {
         "isTerminatingState": false,
-        "h": "S14"
+        "b": "S13"
     },
     "S23": {
         "isTerminatingState": false,
-        "r": "S6"
+        "u": "S22"
     },
     "S24": {
         "isTerminatingState": false,
-        "y": "S9"
+        "U": "S20"
     },
     "S25": {
         "isTerminatingState": false,
-        "k": "S1"
+        "r": "S14"
     }
 }
