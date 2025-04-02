@@ -1,0 +1,14 @@
+{
+      "startingState": "S1",
+      "S0": {
+            "isTerminatingState": true
+      },
+      "S1": {
+            "isTerminatingState": false,
+            "a": "S2"
+      },
+      "S2": {
+            "isTerminatingState": false,
+            "b": "S0"
+      }
+}

@@ -1,0 +1,198 @@
+import os
+import json
+from typing import Dict, Set, List
+from collections import deque
+import networkx as nx
+from networkx.drawing.nx_agraph import to_agraph
+from PIL import Image
+from nfa import NFA
+
+class DFA:
+    def __init__(self, nfa):
+        """
+        Initialize the DFA with an NFA as input.
+        """
+        self.nfa = nfa
+        self.states: Dict[frozenset, str] = {}  # Maps sets of NFA states to DFA state names
+        self.transitions: Dict[str, Dict[str, str]] = {}  # DFA transitions
+        self.start_state: str = None
+        self.accept_states: Set[str] = set()
+
+        self._convert_nfa_to_dfa()
+        self.rename_states()
+
+    def _convert_nfa_to_dfa(self):
+        """
+        Convert the given NFA to a DFA using the subset construction algorithm.
+        """
+        # Step 1: Compute the epsilon-closure of the NFA's start state
+        start_closure = self._epsilon_closure({self.nfa.initial_state})
+        start_state_name = self._get_state_name(start_closure)
+        self.start_state = start_state_name
+        self.states[frozenset(start_closure)] = start_state_name
+        self.transitions[start_state_name] = {}
+
+        # Step 2: Perform BFS to explore all DFA states
+        queue = deque([start_closure])
+        while queue:
+            current_closure = queue.popleft()
+            current_state_name = self._get_state_name(current_closure)
+
+            # Group transitions by symbol
+            symbol_to_states = {}
+            for state in current_closure:
+                for symbol, next_states in state.transitions.items():
+                    if symbol != "ε":  # Ignore epsilon transitions
+                        if symbol not in symbol_to_states:
+                            symbol_to_states[symbol] = set()
+                        symbol_to_states[symbol].update(next_states)
+
+            # Process transitions for each symbol
+            for symbol, next_states in symbol_to_states.items():
+                next_closure = self._epsilon_closure(next_states)
+                next_state_name = self._get_state_name(next_closure)
+
+                if frozenset(next_closure) not in self.states:
+                    self.states[frozenset(next_closure)] = next_state_name
+                    self.transitions[next_state_name] = {}
+                    queue.append(next_closure)
+
+                self.transitions[current_state_name][symbol] = next_state_name
+
+            # Mark as accepting state if any NFA state in the closure is accepting
+            if any(state == self.nfa.terminating_state for state in current_closure):
+                self.accept_states.add(current_state_name)
+
+    def _epsilon_closure(self, states: Set) -> Set:
+        """
+        Compute the epsilon-closure of a set of NFA states.
+        """
+        closure = set(states)
+        stack = list(states)
+
+        while stack:
+            state = stack.pop()
+            for next_state in state.transitions.get("ε", []):
+                if next_state not in closure:
+                    closure.add(next_state)
+                    stack.append(next_state)
+
+        return closure
+
+    def _get_state_name(self, states: Set) -> str:
+        """
+        Generate a unique name for a set of NFA states.
+        """
+        return "_".join(sorted(state.state_name for state in states))
+    
+    def rename_states(self):
+        """
+        Rename DFA states to a more readable format (e.g., S1, S2, ...).
+        Updates the DFA's transitions, start state, and accept states.
+        """
+        # Create a mapping from old state names to new state names
+        state_mapping = {}
+        for index, old_state in enumerate(self.transitions.keys(), start=1):
+            state_mapping[old_state] = f"S{index}"
+
+        # Update transitions with new state names
+        new_transitions = {}
+        for old_state, transitions in self.transitions.items():
+            new_state = state_mapping[old_state]
+            new_transitions[new_state] = {
+                symbol: state_mapping[next_state] for symbol, next_state in transitions.items()
+            }
+
+        # Update start state and accept states
+        self.start_state = state_mapping[self.start_state]
+        self.accept_states = {state_mapping[old_state] for old_state in self.accept_states}
+        self.transitions = new_transitions
+    
+
+def plot_dfa(dfa, output_folder):
+    """
+    Visualize the DFA as a graph and save it as an image.
+    """
+    G = nx.DiGraph()
+
+    # Add states (nodes)
+    for state, transitions in dfa.transitions.items():
+        G.add_node(state, shape="doublecircle" if state in dfa.accept_states else "circle")
+        for symbol, next_state in transitions.items():
+            G.add_edge(state, next_state, label=symbol)
+
+    # Add the start state
+    G.add_node("st", shape="none", label="")
+    G.add_edge("st", dfa.start_state)
+
+    # Convert to AGraph for styling and layout
+    A = to_agraph(G)
+    A.graph_attr.update(rankdir="LR")
+
+    # Save the graph as an image
+    graph_path = os.path.join(output_folder, "dfa.png")
+    A.layout(prog="dot")
+    A.draw(graph_path)
+
+
+def save_dfa_to_json(dfa, output_folder):
+    """
+    Save the DFA transitions and states to a JSON file.
+    """
+    dfa_dict = {
+        "start_state": dfa.start_state,
+        "accept_states": list(dfa.accept_states),
+        "transitions": dfa.transitions,
+    }
+    json_path = os.path.join(output_folder, "dfa.json")
+    with open(json_path, "w") as json_file:
+        json.dump(dfa_dict, json_file, indent=4)
+
+if __name__ == "__main__":
+    # List of regex test cases
+    regex_list = [
+        "(a|b)*abb",
+        # "(N|[oO]h?)[a-z]^(g[.]?[.r]?[.e]?[.a]?t)[a-z]",
+        # "[a-zA-Z]+[0-9]_",
+        # "[a-zA-Z0-9]+2[a-zA-Z]+[a-zA-Z0-9]",
+        # "[Oo]sama+",
+        # "a",
+        # "a_",
+        # "a_(a+b)_b",
+        # "a_b",
+        # "ab",
+        # "ab_cd",
+        # "ab_cd_ef",
+        # "S[kK][iI][bB][iI][dD][iI]",
+        # "TheBoysWishesUEidMubarak",
+    ]
+
+    folder_names = [
+        "a_b_abb",
+        # "N_oO_h_a-z_g_r_e_a_t",
+        # # "a-zA-Z_0-9_",
+        # # "a-zA-Z0-9_2_a-zA-Z_a-zA-Z0-9",
+        # # "Oo_sama_plus",
+        # # "a",
+        # # "a_",
+        # # "a_a_plus_b_b",
+        # # "a_b",
+        # # "ab",
+        # # "ab_cd",
+        # # "ab_cd_ef",
+        # # "SkKiIbBiIdDiI",
+        # # "TheBoysWishesUEidMubarak",
+    ]
+
+    for regex, folder_name in zip(regex_list, folder_names):
+        # Create output folder for each regex
+        output_folder = os.path.join(os.getcwd(), "output", folder_name)
+        os.makedirs(output_folder, exist_ok=True)
+
+        # Build NFA and convert to DFA
+        result_nfa = NFA().build_nfa_from_postfix(regex)
+        dfa = DFA(result_nfa)
+
+        # Save DFA graph and JSON
+        plot_dfa(dfa, output_folder)
+        save_dfa_to_json(dfa, output_folder)

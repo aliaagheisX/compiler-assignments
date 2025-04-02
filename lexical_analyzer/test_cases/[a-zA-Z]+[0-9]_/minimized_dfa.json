@@ -1,0 +1,17 @@
+{
+      "startingState": "S2",
+      "S0": {
+            "isTerminatingState": true,
+            "a-z": "S0",
+            "A-Z": "S0",
+            "0-9": "S1"
+      },
+      "S1": {
+            "isTerminatingState": true
+      },
+      "S2": {
+            "isTerminatingState": false,
+            "a-z": "S0",
+            "A-Z": "S0"
+      }
+}
